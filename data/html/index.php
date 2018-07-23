@@ -11,7 +11,7 @@
     <img src="/img.jpg" alt="" class="thumbnail">
 
     <?php
-      $mysql = new mysqli($_ENV['DATABASE_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_DATABASE']);
+      $mysql = new mysqli($_ENV['DATABASE_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
 
       if (!$mysql) {
         echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -19,7 +19,7 @@
         exit;
       }
 
-      $sql = "INSERT INTO hoges(create_at) VALUE('" . date('Y-m-d H:i:s') . "')";
+      $sql = "INSERT INTO hoges(created_at) VALUE('" . date('Y-m-d H:i:s') . "')";
 
       $result = $mysql->query($sql);
 
@@ -36,6 +36,6 @@
       phpinfo();
     ?>
   </div>
-  <script src="/main.jp"></script>
+  <script src="/main.js"></script>
 </body>
 </html>
