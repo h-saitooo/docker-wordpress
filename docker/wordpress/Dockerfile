@@ -1,4 +1,4 @@
-FROM wordpress:4.9.7-php7.2-fpm-alpine
+FROM wordpress:5-php7.2-fpm-alpine
 
 RUN apk update && apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
