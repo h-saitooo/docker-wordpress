@@ -28,7 +28,19 @@ services:
     volumes:
       - data-wp:/var/www/html:rw
       - ./setting/php:/usr/local/etc/php:ro
-      - ${THEME_DIRECTORY}:/var/www/html/wp-content/themes/${THEME_NAME}:ro
+      - ${THEME_DIRECTORY}:/var/www/html/wp-content/themes/${THEME_NAME}
+    networks:
+      - back
+
+  wpcli:
+    image: wordpress:cli
+    depends_on:
+      - wordpress
+      - mysql
+    volumes:
+      - data-wp:/var/www/html:rw
+    links:
+      - mysql
     networks:
       - back
 
@@ -40,6 +52,18 @@ services:
     env_file: .env
     volumes:
       - data-db:/var/lib/mysql
+    networks:
+      - back
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    env_file: .env
+    links:
+      - mysql
+    ports:
+      - 8888:80
+    volumes:
+      - "./phpmyadmin/sessions:/sessions"
     networks:
       - back
 
