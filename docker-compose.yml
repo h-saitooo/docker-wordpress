@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   nginx:
     image: nginx:1.16.0-alpine
@@ -28,7 +28,7 @@ services:
     volumes:
       - data-wp:/var/www/html:rw
       - ./setting/php:/usr/local/etc/php:ro
-      - ${THEME_DIRECTORY}:/var/www/html/wp-content/themes/${THEME_NAME}
+      - ${THEME_DIRECTORY}:/var/www/html/wp-content/themes/${THEME_NAME}:ro
     networks:
       - back
 
@@ -51,7 +51,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - data-db:/var/lib/mysql
+      - data-db:/var/lib/mysql:rw
     networks:
       - back
 
@@ -63,7 +63,7 @@ services:
     ports:
       - 8888:80
     volumes:
-      - "./phpmyadmin/sessions:/sessions"
+      - ./phpmyadmin/sessions:/sessions:rw
     networks:
       - back
 
